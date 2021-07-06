@@ -1,9 +1,6 @@
 # custom-mybatis
 
 
-[TOC]
-
-
 ### 基础代码生成 集成使用说明
 
 > v1.3.6 修正windows版本正则失败的错误
@@ -82,9 +79,7 @@ commonPackage=com.***.common,common
 > 注意：最后一个方法参数会直接写入工程对应的包内，覆盖原有文件，谨慎使用。
 > ```
 >
-> 生成code.zip 解压如下图。 写入地址为：工程根目录/code.zip
-
-<img src="https://gitee.com/momococo/images/raw/master/img/20210120211317.png" alt="image-20210120211317794" style="zoom:50%;" />
+> 生成code.zip 解压。 写入地址为：工程根目录/code.zip
 
 **调用测试代码**
 
