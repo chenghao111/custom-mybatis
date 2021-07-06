@@ -1,9 +1,9 @@
-# custom-mybatis
+# custom-mybatis自定义基础代码生成工具（基于mybatis）
 
 
 ### 基础代码生成 集成使用说明
 
-> v1.3.6 修正windows版本正则失败的错误
+> v1.0 修正windows版本正则失败的错误
 
 ### 功能点说明
 
