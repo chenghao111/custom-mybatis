@@ -18,14 +18,14 @@
 
 #### 集成步骤
 
-##### 1 maven jar引入
+##### 1 maven jar引入;源码打包为jar上传到对应的maven仓库
 
 > ```
 > 最佳实践：scope设置为test
 > <dependency>
 > <groupId>com.***.code</groupId>
 > <artifactId>code-generate</artifactId>
-> <version>1.3.6-SNAPSHOT</version>
+> <version>1.0.0-SNAPSHOT</version>
 > <scope>test</scope>
 > </dependency>
 > ```
@@ -68,8 +68,6 @@ dtoPackage=com.***.dto,domain
 #common 公共包路径   模块名称
 commonPackage=com.***.common,common
 ```
-
-<img src="https://gitee.com/momococo/images/raw/master/img/20210120205021.png" alt="image-20210120205021408" style="zoom:50%;" />
 
 ##### 3 方法调用
 
