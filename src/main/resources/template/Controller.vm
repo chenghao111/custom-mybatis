@@ -1,0 +1,81 @@
+package ${package_controller};
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import ${package_common}.controller.BaseMultiController;
+import ${package_common}.util.PageParamUtil;
+import ${package_dto}.ResponseResult;
+import ${package_pojo}.${Table};
+import ${package_query}.${Table}Query;
+import ${package_service}.${Table}Service;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+
+/**
+ *
+ * @description TODO
+ * @author ${author}
+ * @date ${cdate}
+ * @since 1.0
+ */
+@RestController
+@RequestMapping("/${table}")
+@Slf4j
+@CrossOrigin
+public class ${Table}Controller extends BaseMultiController {
+
+    /**
+     * 服务对象
+     */
+    @Autowired
+    private ${Table}Service ${table}Service;
+
+    /**
+     * 查看列表
+     *
+     * @param query
+     * @return ${package_dto}.ResponseResult
+     * @author ${author}
+     */
+    @RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
+    public ResponseResult<${Table}> list(${Table}Query query) {
+        // 最大可查询数量
+        query.setPageSize(Math.min(query.getPageSize(), 100));
+        // 设置分页查询信息
+        PageHelper.startPage(query.getPageNum(), query.getPageSize());
+        try {
+            // PageHelper会自动补全mybatis查询分页语句
+            List<${Table}> list = ${table}Service.queryForList(query);
+            // 分页信息
+            PageInfo<${Table}> pageInfo = new PageInfo<>(list);
+            return PageParamUtil.toResult(list, query, pageInfo);
+        } catch (Exception e) {
+            log.error("[查看列表]失败", e);
+        }
+        return new ResponseResult<>(false, "查询失败");
+    }
+
+    /**
+     * 删除数据
+     *
+     * @param query
+     * @return ${package_dto}.ResponseResult
+     * @author ${author}
+     */
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST, RequestMethod.GET})
+    public ResponseResult<Void> delete(${Table}Query query) {
+        try {
+            ${table}Service.deleteByQuery(query);
+            return new ResponseResult<>(true, "删除成功");
+        } catch (Exception e) {
+            log.error("[删除数据]失败", e);
+        }
+        return new ResponseResult<>(false, "删除失败");
+    }
+
+
+
+}

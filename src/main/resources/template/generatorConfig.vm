@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <!-- 配置文件
+    <properties resource="generator.properties"></properties>   -->
+
+    <!--
+ targetRuntime常用值:
+    MyBatis3Simple(只生成基本的CRUD和少量的动态SQL)
+    MyBatis3(生成完整的CRUD，包含CriteriaAPI方法Example后缀的方法)
+ -->
+    <!-- 使用自定义的插件 -->
+    <context id="MysqlContext" targetRuntime="top.momoco.custom.code.gen.plugin.MyIntrospectedTableImpl" defaultModelType="flat">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 由于beginningDelimiter和endingDelimiter的默认值为双引号(")，在Mysql中不能这么写，所以还要将这两个默认值改为`  -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <plugin type="top.momoco.custom.code.gen.plugin.LombokPlugin"/>
+        <!-- 为生成的Java模型类添加序列化接口，并生成serialVersionUID字段 -->
+        <plugin type="top.momoco.custom.code.gen.plugin.SerializablePlugin">
+            <property name="suppressJavaInterface" value="false"/>
+        </plugin>
+        <commentGenerator type="top.momoco.custom.code.gen.plugin.MyCommentGenerator" />
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="${generator_jdbc_driver}"
+                        connectionURL="${generator_jdbc_url}"
+                        userId="${generator_jdbc_username}"
+                        password="${generator_jdbc_password}" />
+
+        <!-- model生成 -->
+        <javaModelGenerator targetPackage="${generator_javaModelGenerator_targetPackage}" targetProject="${targetProject}" />
+        <!-- MapperXML生成 -->
+        <sqlMapGenerator targetPackage="${generator_sqlMapGenerator_targetPackage}" targetProject="${targetProject_sqlMap}" />
+
+        <!-- 需要映射的表 -->
+        #foreach($table in $tables)
+            #if($last_insert_id_tables.containsKey($!table.table_name) == true)
+                <table tableName="$!table.table_name" domainObjectName="$!table.model_name"    enableInsert="true"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="$!last_insert_id_tables.get($!table.table_name)" sqlStatement="MySql" identity="true"/>
+                </table>
+            #else
+                <table tableName="$!table.table_name" domainObjectName="$!table.model_name"    enableInsert="true"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false"></table>
+            #end
+        #end
+    </context>
+</generatorConfiguration>

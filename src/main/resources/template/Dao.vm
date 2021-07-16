@@ -1,0 +1,24 @@
+package ${package_mapper};
+
+import ${package_common}.persistence.BaseDao;
+import ${package_pojo}.${Table};
+import ${package_query}.${Table}Query;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
+
+/**
+ * ( ${Table})表数据库访问层
+ *
+ * @author  ${author}
+ * @date   ${cdate}
+ * @since  1.0
+ */
+public interface ${Table}Dao extends BaseDao<${Table},${Table}Query> {
+
+
+    /***
+     * 批量插入
+     * @param    ${table}s
+     */
+    void batchInsert(@Param("list") List<${Table}> ${table}s);
+}

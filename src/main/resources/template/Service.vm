@@ -1,0 +1,95 @@
+package ${package_service};
+
+import ${package_pojo}.${Table};
+import ${package_query}.${Table}Query;
+import java.util.List;
+
+
+/**
+ * ${Table}表服务接口
+ * @author ${author}
+ * @since 1.0
+ * @date ${cdate}
+ */
+public interface ${Table}Service {
+
+    /**
+     * 插入一条纪录
+     *
+     * @author ${author}
+     * @param ${table}
+     * @date ${cdate}
+     * @return long
+     */
+    long insert( ${Table} ${table});
+
+    /**
+     * 更新一条纪录
+     *
+     * @author ${author}
+     * @param ${table}
+     * @date ${cdate}
+     * @return int
+     */
+    int update(${Table} ${table});
+
+    /**
+     * 根据主键删除一条记录
+     *
+     * @author ${author}
+     * @param id
+     * @date ${cdate}
+     * @return int
+     */
+    int deleteById(Long id);
+
+    /**
+     * 根据查询条件 查询list
+     *
+     * @author ${author}
+     * @param query
+     * @date ${cdate}
+     * @return java.util.List<${package_pojo}.${Table}>
+     */
+    List<${Table}> queryForList(${Table}Query query);
+
+    /**
+     * 根据查询条件 查询 list （分页）
+     *
+     * @author ${author}
+     * @param query
+     * @date ${cdate}
+     * @return java.util.List<${package_pojo}.${Table}>
+     */
+    List<${Table}> queryForPage(${Table}Query query);
+
+    /**
+     * 根据查询条件 查询实体数量
+     *
+     * @author ${author}
+     * @param query
+     * @date ${cdate} 
+     * @return int
+     */
+    int queryForCount(${Table}Query query);
+
+    /**
+     * 根据查询条件 查询实体
+     *
+     * @author ${author}  
+     * @param id
+     * @date ${cdate}
+     * @return ${package_pojo}.${Table};
+     */
+    ${Table} getEntityById(Long id);
+
+    /**
+     * 根据条件删除
+     *
+     * @author ${author}
+     * @param query
+     * @date ${cdate}
+     */
+    void deleteByQuery(${Table}Query query);
+
+}

@@ -1,0 +1,152 @@
+package ${package_manager_impl};
+
+import ${package_mapper}.${Table}Dao;
+import ${package_pojo}.${Table};
+import ${package_query}.${Table}Query;
+import ${package_manager}.BaseManager;
+import ${package_manager}.${Table}Manager;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
+
+
+import java.util.List;
+
+/**
+ * ( ${Table})管理实现类
+ *
+ * @Author: ${author}
+ * @Date: ${cdate}
+ * @Since: 1.0.0
+ */
+@Component
+@Slf4j
+public class  ${Table}ManagerImpl extends BaseManager< ${Table}> implements  ${Table}Manager {
+    /**
+     * 数据访问层
+     */
+    @Autowired(required = false)
+    private  ${Table}Dao  ${table}Dao;
+
+    /**
+     * 插入一条纪录
+     *
+     * @param  ${table}
+     * @return long
+     * @author ${author} 
+     * @date ${cdate}  
+     */
+    @Override
+    public long insert( ${Table}  ${table}) {
+        return  ${table}Dao.insert( ${table});
+    }
+
+    /**
+     * 更新一条纪录
+     *
+     * @param  ${table}
+     * @return int
+     * @author ${author} 
+     * @date ${cdate}  
+     */
+    @Override
+    public int update( ${Table}  ${table}) {
+        return  ${table}Dao.update( ${table});
+    }
+
+    /**
+     * 根据主键删除一条记录
+     *
+     * @param id
+     * @return int
+     * @author ${author} 
+     * @date ${cdate}  
+     */
+    @Override
+    public int deleteById(Long id) {
+        return  ${table}Dao.deleteById(id);
+    }
+
+    /**
+     * 根据查询条件 查询list
+     *
+     * @param query
+     * @return java.util.List<${package_pojo}.${Table}>
+     * @author ${author} 
+     * @date ${cdate}  
+     */
+    @Override
+    public List< ${Table}> queryForList( ${Table}Query query) {
+        return  ${table}Dao.queryForList(query);
+    }
+
+    /**
+     * 根据查询条件 查询 list （分页）
+     *
+     * @param query
+     * @return java.util.List<${package_pojo}.${Table}>
+     * @author ${author} 
+     * @date ${cdate}  
+     */
+    @Override
+    public List< ${Table}> queryForPage( ${Table}Query query) {
+        return  ${table}Dao.queryForPage(query);
+    }
+
+    /**
+     * 根据查询条件 查询实体数量
+     *
+     * @param query
+     * @return int
+     * @author ${author} 
+     * @date ${cdate}
+     */
+    @Override
+    public int queryForCount( ${Table}Query query) {
+        return  ${table}Dao.queryForCount(query);
+    }
+
+    /**
+     * 根据查询条件 查询实体
+     *
+     * @param id
+     * @return ${package_pojo}.${Table}
+     * @author ${author} 
+     * @date ${cdate}
+     */
+    @Override
+    public  ${Table} getEntityById(Long id) {
+        return  ${table}Dao.getEntityById(id);
+    }
+
+    
+
+
+    /**
+     * 批量插入,加入事物管理
+     *
+     * @param  ${table}s
+     */
+    @Override
+    public void batchInsert(List< ${Table}>  ${table}s) {
+
+        boolean resultFlag = new TransactionTemplate(transactionManager).execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus status) {
+                try {
+                     ${table}Dao.batchInsert( ${table}s);
+                    return true;
+                } catch (Exception ex) {
+                    status.setRollbackOnly();
+                    log.error(" 批量插入数据 (batchInsert)异常！--->{}",ex.getMessage(), ex);
+                    return false;
+                }
+            }
+        });
+
+    }
+}
+

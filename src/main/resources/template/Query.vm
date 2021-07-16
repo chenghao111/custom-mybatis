@@ -1,0 +1,24 @@
+package ${package_query};
+
+import ${package_common}.query.SearchParameter;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
+
+/**
+ * (${Table}Query)接口查询类
+ *
+ * @author ${author}
+ * @date ${cdate}
+ * @since 1.0
+ */
+@Getter
+@Setter
+public class ${Table}Query extends SearchParameter implements Serializable {
+    /**
+     * 序列化
+     */
+    private static final long serialVersionUID = -1L;
+
+}
