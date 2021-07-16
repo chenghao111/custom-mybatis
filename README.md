@@ -114,8 +114,6 @@ commonPackage=com.***.common,common
         zipTable(tables, pojoPath, mapperPath, zip, writeFlag);
         //生成通用代码
         genCommonCode(tables, ctime, author, zip, writeFlag);
-        // 生成hmc请求
-        genHmcCode(tableComment, zip);
         FileOutputStream fileOutputStream = new FileOutputStream(basePath + File.separator + "code.zip");
         IoUtil.write(fileOutputStream, true, outputStream.toByteArray());
       
